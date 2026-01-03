@@ -1,7 +1,6 @@
 <?php
 
-require_once __DIR__. "/../../helpers/functions.php";
-require_once __DIR__. "/../../config/db.php";
+require_once __DIR__ . "/../../helpers/functions.php";
 
 
 $name = $_POST['user_name'];
@@ -10,19 +9,16 @@ $tel = $_POST['tel'];
 $pass = $_POST['pass'];
 $pass2 = $_POST['pass2'];
 
-if($pass !== $pass2){
+//ПАРОЛЬ
+$hash = pass_handle($pass, $pass2);
+if ($hash === false) {
     $_SESSION['error']['pass'] = 'Пароли должны совпадать';
     header('Location: /php-onlydigital-crud/register.php');
     exit;
 }
-
-$sql = "SELECT email,phone FROM users";
-$row = $pdo->query($sql);
-$res= $row->fetchAll();
-
-if(!uniqe_email($email,$res)){
+//ПОЧТА
+if (!uniqe_email($email)) {
     $_SESSION['error']['email'] = 'Пользователь с такой почтой уже существует';
     header('Location: /php-onlydigital-crud/register.php');
     exit;
 };
-

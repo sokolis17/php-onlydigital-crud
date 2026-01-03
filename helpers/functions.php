@@ -1,11 +1,23 @@
 <?php
 session_start();
 
-function uniqe_email($email,$email_arr){
-    for($i=0;$i<count($email_arr);$i++){
-    if($email === $email_arr[$i]['email']){
+require_once __DIR__ . "/../config/db.php";
+
+function pass_handle($pass_main,$pass_second){
+    if($pass_main !== $pass_second){
         return false;
-        }
-    }
-    return true;
+    }else return password_hash($pass_main,PASSWORD_DEFAULT);
+}
+
+
+function uniqe_email($email)
+{
+    global $pdo;
+
+    $sql = "SELECT id FROM users WHERE email = :email";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':email' => $email]);
+    if($stmt->fetchAll()){
+        return false;
+    }else return true;
 }
