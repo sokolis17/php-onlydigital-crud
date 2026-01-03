@@ -3,14 +3,21 @@ session_start();
 
 require_once __DIR__ . "/../config/db.php";
 
-function pass_handle($pass_main,$pass_second){
+function addUser($name,$email,$tel,$pass_hash){
+    global $pdo ;
+    $sql = "INSERT INTO users (name,email,tel,password) VALUES (:name,:email,:tel,:password)";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([':name'=>$name,':email'=>$email,':tel'=>$tel,':password'=>$pass_hash]);
+}
+
+function passHandle($pass_main,$pass_second){
     if($pass_main !== $pass_second){
         return false;
     }else return password_hash($pass_main,PASSWORD_DEFAULT);
 }
 
 
-function uniqe_email($email)
+function uniqeEmail($email)
 {
     global $pdo;
 
@@ -22,7 +29,7 @@ function uniqe_email($email)
     }else return true;
 }
 
-function uniqe_phone($tel)
+function uniqePhone($tel)
 {
     global $pdo;
 
