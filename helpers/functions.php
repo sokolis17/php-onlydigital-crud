@@ -21,3 +21,15 @@ function uniqe_email($email)
         return false;
     }else return true;
 }
+
+function uniqe_phone($tel)
+{
+    global $pdo;
+
+    $sql = "SELECT id FROM users WHERE tel = :tel";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':tel' => $tel]);
+    if($stmt->fetchAll()){
+        return false;
+    }else return true;
+}
