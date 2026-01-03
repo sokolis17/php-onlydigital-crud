@@ -5,7 +5,12 @@
                 <h4 class="card-title text-center mb-0">Регистрация</h4>
             </div>
             <div class="card-body p-4">
-
+                <?php if (isset($_SESSION['error']['global'])): ?>
+                    <div class="alert alert-danger">
+                        <strong>Ошибка!</strong> <?= $_SESSION['error']['global'] ?>
+                    </div>
+                    <?php unset($_SESSION['error']['global']); ?>
+                <?php endif; ?>
                 <form action="src/actions/reg.php" method="POST">
 
                     <div class="mb-3">
