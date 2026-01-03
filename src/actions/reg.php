@@ -14,11 +14,20 @@ $hash = pass_handle($pass, $pass2);
 if ($hash === false) {
     $_SESSION['error']['pass'] = 'Пароли должны совпадать';
     header('Location: /php-onlydigital-crud/register.php');
-    exit;
 }
 //ПОЧТА
 if (!uniqe_email($email)) {
     $_SESSION['error']['email'] = 'Пользователь с такой почтой уже существует';
     header('Location: /php-onlydigital-crud/register.php');
-    exit;
 };
+//ТЕЛЕФОН
+if (!uniqe_phone($tel)) {
+    $_SESSION['error']['tel'] = 'Пользователь с таким телефоном уже существует';
+    header('Location: /php-onlydigital-crud/register.php');
+}
+
+if(!empty($_SESSION['error'])){
+    header('Location: /php-onlydigital-crud/register.php');
+    exit;
+}
+?>

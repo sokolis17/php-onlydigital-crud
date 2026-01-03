@@ -14,8 +14,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="phone" class="form-label">Телефон</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="+7 (999) 000-00-00" required>
+                        <label for="tel" class="form-label">Телефон</label>
+                        <input type="tel" class="form-control" id="tel" name="tel" placeholder="+7 (999) 000-00-00" required>
+                        <?php if (isset($_SESSION['error']['tel'])): ?>
+                            <div class="text-danger small mt-1"><?= $_SESSION['error']['tel'] ?></div>
+                            <?php unset($_SESSION['error']['tel']); ?>
+                        <?php endif; ?>
                     </div>
 
                     <div class="mb-3">
