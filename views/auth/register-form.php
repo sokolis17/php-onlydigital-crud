@@ -25,16 +25,16 @@
 
                     <div class="mb-3">
                         <label for="pass" class="form-label">Пароль</label>
-                        <input type="password" class="form-control" id="pass" name="pass" required>
+                        <input type="password" class="form-control" id="pass" name="pass" placeholder="******" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="pass2" class="form-label">Повторите пароль</label>
-                        <input type="password" class="form-control" id="pass2" name="second_pass" required>
+                        <input type="password" class="form-control" id="pass2" name="second_pass" placeholder="******" required>
                     </div>
 
                     <div class="d-grid gap-2 mt-4">
-                        <button type="submit" class="btn btn-primaryсд">Создать аккаунт</button>
+                        <button type="submit" class="btn btn-primary">Создать аккаунт</button>
                     </div>
                     
                 </form>

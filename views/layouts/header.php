@@ -30,10 +30,10 @@ if (session_status() === PHP_SESSION_NONE) {
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/php-onlydigital-crud/views/auth/login-form.php">Вход</a>
+                        <a class="nav-link text-white" href="/php-onlydigital-crud/login.php">Вход</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/php-onlydigital-crud/views/auth/register-form.php">Регистрация</a>
+                        <a class="nav-link text-white" href="/php-onlydigital-crud/register.php">Регистрация</a>
                     </li>
                 <?php endif; ?>
             </ul>
