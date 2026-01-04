@@ -6,11 +6,15 @@
             </div>
             <div class="card-body p-4">
                 
-                <form action="/src/actions/reg.php" method="POST">
+                <form action="src/actions/log.php" method="POST">
 
                     <div class="mb-3">
                         <label for="login" class="form-label">Логин</label>
                         <input type="text" class="form-control" id="login" name="login" placeholder="+7999... или gmail@ru" required>
+                        <?php if (isset($_SESSION['error']['find'])): ?>
+                            <div class="text-danger small mt-1"><?= $_SESSION['error']['find'] ?></div>
+                            <?php unset($_SESSION['error']['find']); ?>
+                        <?php endif; ?>
                     </div>
 
                     <div class="mb-3">
