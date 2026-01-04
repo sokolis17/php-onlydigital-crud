@@ -21,7 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <ul class="nav">
                 <?php if (isset($_SESSION['user']['id'])): ?>
                     <li class="nav-item">
-                        <a class="nav-link text-danger fw-bold" href="/src/actions/logout.php">Выход</a>
+                        <a class="nav-link text-danger fw-bold" href="/php-onlydigital-crud/src/actions/logout.php">Выход</a>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
