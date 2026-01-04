@@ -48,7 +48,7 @@ function myFindUser($login)
 {
     global $pdo;
 
-    $sql = "SELECT id,password,name FROM users WHERE email = :email OR tel = :tel";
+    $sql = "SELECT * FROM users WHERE email = :email OR tel = :tel";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':email' => $login,':tel' => $login]);
     return $stmt->fetch();
