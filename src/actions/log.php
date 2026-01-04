@@ -2,6 +2,16 @@
 
 require_once __DIR__ . '/../../helpers/functions.php';
 
+//КАПЧА
+$token = $_POST['smart-token'] ?? '';
+
+if (!checkCaptcha($token)) {
+    $_SESSION['error']['login'] = "Капча не пройдена!";
+    header('Location: /php-onlydigital-crud/login.php');
+    exit;
+}
+
+//АВТОРИЗАЦИЯ
 $login = $_POST['login'];
 $pass = $_POST['pass'];
 

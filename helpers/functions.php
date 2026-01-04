@@ -2,6 +2,7 @@
 session_start();
 
 require_once __DIR__ . "/../config/db.php";
+$keys = require_once __DIR__. '/../config/keys.php';
 
 function addUser($name, $email, $tel, $pass_hash)
 {
@@ -66,4 +67,35 @@ function userUpdate($id,$name, $email, $tel, $pass = null){
     }
     $stmt = $pdo->prepare($sql);
     return $stmt->execute($params);
+}
+function checkCaptcha($token) {
+
+    global $keys;
+
+    $secret = $keys['server_key']; 
+    
+    $ch = curl_init("https://smartcaptcha.yandexcloud.net/validate");
+    $args = [
+        "secret" => $secret,
+        "token" => $token,
+        "ip" => $_SERVER['REMOTE_ADDR']
+    ];
+    
+    curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($args));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+
+    $server_output = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    
+    if ($http_code !== 200) {
+        return false;
+    }
+
+    
+    $resp = json_decode($server_output);
+    return $resp->status === "ok";
 }
