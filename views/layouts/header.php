@@ -19,12 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <a class="navbar-brand fw-bold" href="/">PHP Auth</a>
             
             <ul class="nav">
-                <?php if (isset($_SESSION['user'])): ?>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/home.php">
-                            <?= htmlspecialchars($_SESSION['user']['name']) ?>
-                        </a>
-                    </li>
+                <?php if (isset($_SESSION['user']['id'])): ?>
                     <li class="nav-item">
                         <a class="nav-link text-danger fw-bold" href="/src/actions/logout.php">Выход</a>
                     </li>
