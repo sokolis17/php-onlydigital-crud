@@ -11,7 +11,6 @@ require_once __DIR__ . '/views/layouts/header.php';
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-
             <div class="card shadow-sm">
                 <div class="card-body p-4 text-center">
 
