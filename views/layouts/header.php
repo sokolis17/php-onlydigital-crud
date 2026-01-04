@@ -18,7 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <body class="d-flex flex-column min-vh-100 bg-light">
     <nav class="navbar navbar-dark bg-dark mb-4 shadow">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="/">PHP Auth</a>
+            <a class="navbar-brand fw-bold" href="/php-onlydigital-crud/index.php">PHP Auth</a>
 
             <ul class="nav">
                 <?php if (isset($_SESSION['user']['id'])): ?>

@@ -1,7 +1,12 @@
 <?php
 
-require_once __DIR__ . '/config/db.php';
+session_start();
 
-require_once __DIR__ . '/views/layouts/header.php';
+if(isset($_SESSION['user'])){
+    header('Location: /php-onlydigital-crud/home.php');
+    exit;
+}else{
+    header('Location: /php-onlydigital-crud/login.php');
+    exit;
+}
 
-require_once __DIR__ . '/views/layouts/footer.php';
