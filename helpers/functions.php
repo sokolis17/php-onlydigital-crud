@@ -53,3 +53,17 @@ function myFindUser($login)
     $stmt->execute([':email' => $login,':tel' => $login]);
     return $stmt->fetch();
 }
+
+function userUpdate($id,$name, $email, $tel, $pass = null){
+    global $pdo;
+    if(!empty($pass)){ 
+        $sql = "UPDATE users SET name = :name,email = :email,tel = :tel,password = :password WHERE id = :id";
+        $pass_hash = password_hash($pass,PASSWORD_DEFAULT);
+        $params = [':id'=>$id,':name' => $name, ':email' => $email, ':tel' => $tel, ':password' => $pass_hash];
+    }else{
+        $sql = "UPDATE users SET name = :name,email = :email,tel = :tel WHERE id = :id";
+        $params = [':id'=>$id,':name' => $name, ':email' => $email, ':tel' => $tel];
+    }
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute($params);
+}
