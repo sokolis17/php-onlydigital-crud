@@ -11,8 +11,8 @@ require_once __DIR__ . '/views/layouts/header.php';
     <div class="col-md-6">
         <div class="card shadow-sm">
             <div class="card-body p-4">
-
                 <h4 class="mb-4 text-center">Редактирование профиля</h4>
+
                 <?php if (isset($_SESSION['msgSucc'])): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>Отлично!</strong> <?= $_SESSION['msgSucc'] ?>

@@ -4,6 +4,7 @@
             <div class="card-header bg-white p-3">
                 <h4 class="card-title text-center mb-0">Регистрация</h4>
             </div>
+
             <div class="card-body p-4">
                 <?php if (isset($_SESSION['error']['global'])): ?>
                     <div class="alert alert-danger">
@@ -11,8 +12,8 @@
                     </div>
                     <?php unset($_SESSION['error']['global']); ?>
                 <?php endif; ?>
-                <form action="src/actions/reg.php" method="POST">
 
+                <form action="src/actions/reg.php" method="POST">
                     <div class="mb-3">
                         <label for="name" class="form-label">Ваше имя</label>
                         <input type="text" class="form-control" id="name" name="user_name" placeholder="Иван Иванов" required>
@@ -55,7 +56,6 @@
                     </div>
 
                 </form>
-
             </div>
         </div>
     </div>

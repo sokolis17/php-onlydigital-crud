@@ -25,12 +25,12 @@ if ($hash === false) {
     $_SESSION['error']['pass'] = 'Пароли должны совпадать';
     header('Location: /php-onlydigital-crud/register.php');
 }
-
+//ОБРАБОТКА ОШИБОК
 if (!empty($_SESSION['error'])) {
     header('Location: /php-onlydigital-crud/register.php');
     exit;
 }
-
+//СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ
 try {
     addUser($name, $email, $tel, $hash);
     header('Location: /php-onlydigital-crud/login.php');
@@ -40,5 +40,3 @@ try {
     header('Location: /php-onlydigital-crud/register.php');
     exit;
 }
-
-

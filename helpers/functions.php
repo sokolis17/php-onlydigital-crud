@@ -2,7 +2,7 @@
 session_start();
 
 require_once __DIR__ . "/../config/db.php";
-$keys = require_once __DIR__. '/../config/keys.php';
+$keys = require_once __DIR__ . '/../config/keys.php';
 
 function addUser($name, $email, $tel, $pass_hash)
 {
@@ -51,51 +51,53 @@ function myFindUser($login)
 
     $sql = "SELECT * FROM users WHERE email = :email OR tel = :tel";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([':email' => $login,':tel' => $login]);
+    $stmt->execute([':email' => $login, ':tel' => $login]);
     return $stmt->fetch();
 }
 
-function userUpdate($id,$name, $email, $tel, $pass = null){
+function userUpdate($id, $name, $email, $tel, $pass = null)
+{
     global $pdo;
-    if(!empty($pass)){ 
+    if (!empty($pass)) {
         $sql = "UPDATE users SET name = :name,email = :email,tel = :tel,password = :password WHERE id = :id";
-        $pass_hash = password_hash($pass,PASSWORD_DEFAULT);
-        $params = [':id'=>$id,':name' => $name, ':email' => $email, ':tel' => $tel, ':password' => $pass_hash];
-    }else{
+        $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
+        $params = [':id' => $id, ':name' => $name, ':email' => $email, ':tel' => $tel, ':password' => $pass_hash];
+    } else {
         $sql = "UPDATE users SET name = :name,email = :email,tel = :tel WHERE id = :id";
-        $params = [':id'=>$id,':name' => $name, ':email' => $email, ':tel' => $tel];
+        $params = [':id' => $id, ':name' => $name, ':email' => $email, ':tel' => $tel];
     }
     $stmt = $pdo->prepare($sql);
     return $stmt->execute($params);
 }
-function checkCaptcha($token) {
+function checkCaptcha($token)
+{
 
     global $keys;
 
-    $secret = $keys['server_key']; 
-    
+    $secret = $keys['server_key'];
+
     $ch = curl_init("https://smartcaptcha.yandexcloud.net/validate");
     $args = [
         "secret" => $secret,
         "token" => $token,
         "ip" => $_SERVER['REMOTE_ADDR']
     ];
-    
+
     curl_setopt($ch, CURLOPT_TIMEOUT, 1);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($args));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    
+
 
     $server_output = curl_exec($ch);
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($http_code !== 200) {
         return false;
     }
 
-    
+
     $resp = json_decode($server_output);
     return $resp->status === "ok";
 }

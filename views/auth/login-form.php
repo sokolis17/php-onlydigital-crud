@@ -29,6 +29,7 @@
                         <label for="pass" class="form-label">Пароль</label>
                         <input type="password" class="form-control" id="pass" name="pass" placeholder="*******" required>
                     </div>
+
                     <div
                         id="captcha-container"
                         class="smart-captcha mb-3"
